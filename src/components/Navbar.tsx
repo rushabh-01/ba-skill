@@ -39,12 +39,12 @@ export const Navbar = () => {
               </Button>
             </Link>
             <AdSubmissionForm />
-            <Link to={adminPath}>
+            {/* <Link to={adminPath}>
               <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
                 <Settings className="h-4 w-4" />
                 CMS
               </Button>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Mobile Navigation */}
