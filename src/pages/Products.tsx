@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -12,6 +12,7 @@ import {
   useEdgesState,
   Panel,
   MarkerType,
+  useReactFlow 
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { Button } from "@/components/ui/button";
@@ -74,6 +75,25 @@ const Products = () => {
   const [selectedAd, setSelectedAd] = useState<Ad | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const [expandedSubcategories, setExpandedSubcategories] = useState<Set<string>>(new Set());
+  
+
+  const InitialFitView = ({ ready }: { ready: boolean }) => {
+  const { fitView } = useReactFlow();
+
+  useEffect(() => {
+    if (!ready) return;
+
+    const t = setTimeout(() => {
+      fitView({ padding: 0.2 });
+    }, 100);
+
+    return () => clearTimeout(t);
+  }, [ready, fitView]);
+
+  return null;
+};
+
+
 
   // Fetch approved ads
   const { data: ads } = useQuery({
@@ -108,6 +128,17 @@ const Products = () => {
       return data as Subcategory[];
     },
   });
+
+useEffect(() => {
+  if (!ads || !categories || !subcategories) return;
+  if (ads.length === 0) return;
+
+  setExpandedCategories(new Set(categories.map((c) => c.id)));
+  setExpandedSubcategories(new Set(subcategories.map((s) => s.id)));
+}, [ads, categories, subcategories]);
+
+
+
 
   // Build tree structure
   const treeData = useMemo(() => {
@@ -327,6 +358,7 @@ const Products = () => {
           attributionPosition="bottom-left"
           proOptions={{ hideAttribution: true }}
         >
+          <InitialFitView ready={!!ads?.length} />
           <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="hsl(var(--muted-foreground) / 0.2)" />
           <Controls showInteractive={false} className="bg-card/80 border border-border/50 rounded-lg overflow-hidden text-black" />
 
@@ -340,6 +372,11 @@ const Products = () => {
                   setExpandedSubcategories(new Set());
                 } else if (categories) {
                   setExpandedCategories(new Set(categories.map((c) => c.id)));
+                  if (subcategories) {
+                    setExpandedSubcategories(new Set(subcategories.map((s) => s.id)));
+                  }else {
+                    setExpandedSubcategories(new Set());
+                  }
                 }
               }}
               className="bg-card/80 backdrop-blur text-purple-700"
