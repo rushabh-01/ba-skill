@@ -18,8 +18,8 @@ export const Navbar = () => {
           <a href="/" className="flex items-center gap-3 group">
             <div className="relative">
               <div className="absolute inset-0 rounded-xl bg-primary/30 blur-lg group-hover:blur-xl transition-all" />
-              <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-                <Briefcase className="h-5 w-5 text-primary-foreground" />
+              <div className="relative h-10 w-10 flex items-center justify-center shadow-lg border border-border/50 rounded-full">
+                <img src="/96cf8c82-5a17-4b21-ba38-e840e6c671e3.png" alt="" className="border border-border/50 rounded-full"/>
               </div>
             </div>
             <div className="hidden md:block">
