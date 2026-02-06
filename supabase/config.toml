@@ -1,0 +1,4 @@
+project_id = "nrppwonkfkjcwfzirndb"
+
+[functions.populate-skills]
+verify_jwt = false
