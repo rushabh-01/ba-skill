@@ -207,7 +207,8 @@ const Products = () => {
             data: {
               label: (
                 <div
-                  className="w-fit text-saddlebrown-500 flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 bg-card border border-border/50"
+                  className="w-fit flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all hover:scale-105 bg-card border border-border/50"
+                  style={{background:"slategray"}}
                   onClick={() => {
                     setExpandedSubcategories((prev) => {
                       const next = new Set(prev);
@@ -218,7 +219,7 @@ const Products = () => {
                   }}
                 >
                   {isSubExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
-                  <span className="font-medium text-sm">{sub.name}</span>
+                  <span className="font-medium text-sm" style={{ color: "snow" }}>{sub.name}</span>
                   <Badge variant="outline" className="ml-1 text-xs">
                     {subAds.length}
                   </Badge>
@@ -258,7 +259,7 @@ const Products = () => {
                           <Image className="w-4 h-4 text-muted-foreground" />
                         </div>
                       )}
-                      <span className="font-medium text-sm truncate">{ad.title}</span>
+                      <span className="font-medium text-sm truncate" style={{ color: "darkblue" }}>{ad.title}</span>
                     </div>
                   ),
                 },
@@ -327,7 +328,7 @@ const Products = () => {
           proOptions={{ hideAttribution: true }}
         >
           <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="hsl(var(--muted-foreground) / 0.2)" />
-          <Controls showInteractive={false} className="bg-card/80 border border-border/50 rounded-lg overflow-hidden" />
+          <Controls showInteractive={false} className="bg-card/80 border border-border/50 rounded-lg overflow-hidden text-black" />
 
           <Panel position="top-right" className="flex gap-2">
             <Button
@@ -341,7 +342,7 @@ const Products = () => {
                   setExpandedCategories(new Set(categories.map((c) => c.id)));
                 }
               }}
-              className="bg-card/80 backdrop-blur"
+              className="bg-card/80 backdrop-blur text-purple-700"
             >
               {expandedCategories.size > 0 ? "Collapse All" : "Expand All"}
             </Button>
